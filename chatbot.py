@@ -5,7 +5,7 @@ from openai import OpenAI # CORRECT IMPORT: Use the OpenAI library
 # --- DeepSeek API Integration ---
 def call_external_api(user_message, conversation_history):
     """
-    Calls the DeepSeek API to get a chatbot response using the OpenAI library structure.
+    Calls the Depython -m venv venvepSeek API to get a chatbot response using the OpenAI library structure.
 
     Args:
         user_message (str): The latest message from the user.
