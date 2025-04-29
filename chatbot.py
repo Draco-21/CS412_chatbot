@@ -1,5 +1,3 @@
-# professional_chatbot_deepseek.py
-
 import streamlit as st
 import os
 from openai import OpenAI # CORRECT IMPORT: Use the OpenAI library
