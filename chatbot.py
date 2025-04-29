@@ -2,7 +2,7 @@
 
 import streamlit as st
 import os
-from deepseek import DeepSeek  # Import the DeepSeek class from the deepseek module
+from openai import OpenAI # CORRECT IMPORT: Use the OpenAI library
 
 # --- DeepSeek API Integration ---
 def call_external_api(user_message, conversation_history):
@@ -22,13 +22,12 @@ def call_external_api(user_message, conversation_history):
     # Reads the API key from the environment variable
     api_key = os.environ.get("DEEPSEEK_API_KEY")
     if not api_key:
-        # If the key is not found, return an error message to the UI
         st.error("Error: DEEPSEEK_API_KEY environment variable not set. Please set it before running.")
-        return "API key not configured. Please contact the administrator." # Return error message
+        return "API key not configured. Please contact the administrator."
 
     try:
-        # *** Key Change: Initialize client pointing to DeepSeek API ***
-        client = DeepSeek(
+        # *** CORRECT INITIALIZATION: Use OpenAI client pointing to DeepSeek ***
+        client = OpenAI(
             api_key=api_key,
             base_url="https://api.deepseek.com/v1" # Point to DeepSeek endpoint
             )
@@ -40,11 +39,11 @@ def call_external_api(user_message, conversation_history):
 
         # --- Make the API call ---
         response = client.chat.completions.create(
-            model="deepseek-chat",  # *** Key Change: Use a DeepSeek model name ***
+            model="deepseek-chat",  # Set the desired DeepSeek model here
             messages=messages,
             temperature=0.7,
             max_tokens=150,
-            stream=False # Keep stream=False for simplicity, or adapt UI if True
+            stream=False
         )
         bot_response = response.choices[0].message.content.strip()
 
@@ -57,17 +56,18 @@ def call_external_api(user_message, conversation_history):
 # --- End of DeepSeek API Integration ---
 
 
-# --- Streamlit UI Code (Remains the same) ---
+# --- Streamlit UI Code (Standard Text) ---
 
-st.set_page_config(page_title="Chatbot for hopeless peopl", layout="wide") # Configure page
+st.set_page_config(page_title="Coding Assistant Bot (DeepSeek)", layout="wide")
 
-st.title("Chatbot for hopeless people with no life ✨")
-st.caption("By Jayshil Singh (S11208397)")
+st.title("Coding Assistant Chatbot ✨") # Standard title
+st.caption("Powered by Streamlit and DeepSeek") # Standard caption
 
 # Initialize chat history in session state if it doesn't exist
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "Hello! How can I help you with your Fucking👉👌💦💦💦coding questions today? "}
+        # Standard welcome message
+        {"role": "assistant", "content": "Hello! How can I help you with your coding questions today?"}
     ]
 
 # Display existing chat messages
@@ -76,7 +76,8 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # Accept user input using the chat input widget at the bottom
-if prompt := st.chat_input("Ask your lazy question you Bitch!!!..."):
+# Standard input prompt
+if prompt := st.chat_input("Ask your coding question..."):
     # Add user message to chat history and display it immediately
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -84,7 +85,8 @@ if prompt := st.chat_input("Ask your lazy question you Bitch!!!..."):
 
     # Generate bot response using the API function
     with st.chat_message("assistant"):
-        with st.spinner("🧠 Thinking about your useless request..."):
+         # Standard thinking message
+        with st.spinner("🧠 Thinking..."):
             api_history = [msg for msg in st.session_state.messages if msg["role"] != "system"]
             bot_response = call_external_api(prompt, api_history)
             st.markdown(bot_response)
