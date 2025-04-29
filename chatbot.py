@@ -2,7 +2,6 @@
 
 import streamlit as st
 import os
-from openai import OpenAI # We still use the OpenAI library!
 
 # --- DeepSeek API Integration ---
 def call_external_api(user_message, conversation_history):
