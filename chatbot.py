@@ -2,6 +2,7 @@
 
 import streamlit as st
 import os
+from deepseek import DeepSeek  # Import the DeepSeek class from the deepseek module
 
 # --- DeepSeek API Integration ---
 def call_external_api(user_message, conversation_history):
@@ -27,7 +28,7 @@ def call_external_api(user_message, conversation_history):
 
     try:
         # *** Key Change: Initialize client pointing to DeepSeek API ***
-        client = OpenAI(
+        client = DeepSeek(
             api_key=api_key,
             base_url="https://api.deepseek.com/v1" # Point to DeepSeek endpoint
             )
