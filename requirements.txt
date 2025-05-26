@@ -4,4 +4,4 @@ sentence-transformers
 faiss-cpu
 numpy
 whoosh
-python-dotenv 
+python-dotenv
