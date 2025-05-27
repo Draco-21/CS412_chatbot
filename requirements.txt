@@ -1,10 +1,6 @@
 streamlit
 google-generativeai
-sentence-transformers
-faiss-cpu
-numpy
-whoosh
-python-dotenv
 pdfplumber
 python-docx
 python-pptx
+python-dotenv
