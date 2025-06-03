@@ -1,0 +1,16 @@
+{
+  "title": "For Loop Array",
+  "language": "cpp",
+  "topics": [
+    "data_structures",
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\nusing namespace std;\n\nint main()\n{\n\tint num [10] = {1,2,3,4,5,6,7,8,9,10};\n\tint product = 1;\n\tfor(int i = 0; i < 10; i++){\n\t\tproduct = product * num[i];\n\t\t\n\t}\n\t\n\tcout<<\"The product is \"<<product<<endl;\n\treturn 0;\n}\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\For Loop Array.cpp",
+  "line_numbers": [
+    1,
+    16
+  ]
+}

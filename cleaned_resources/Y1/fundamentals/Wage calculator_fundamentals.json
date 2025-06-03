@@ -1,0 +1,15 @@
+{
+  "title": "Wage calculator",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\nusing namespace std;\n\nint main(){\n\t\n\tchar category;\n\tint R_hours = 0;\n\tint X_hours = 0;\n\tint hours = 0;\n\tdouble X_Pay = 0;\n\tdouble gross_wage = 0;\t\n\tdouble net_wage = 0;\n\tconst int M_Rate = 35;\n\tconst double M_Pay = 10.60;\n\tconst double M_Extra_Pay = 15.90;\n\tconst int F_Rate = 20;\n\tconst double F_Pay = 8.30;\n\tconst double X_F_Pay = 12.45;\n\n\n\tcout<<\"\\t\\t\\t\\t\\t***************************************\\n\";\n\tcout<<\"\\t\\t\\t\\t\\t*Wage Calculator for shoe Lace Company*\\n\";\t\n\tcout<<\"\\t\\t\\t\\t\\t***************************************\\n\\n\";\n\n\n\tstart:\n\n\tcout<<\"\\tEnter Category: 'M' for Management, 'F' for Floor Worker. \";\n\tcin>>category;\n\n\t hour:\n \t\n\t cout<<\"\\tEnter Hours Worked. \";\n\t cin>>hours;\t\n\t\tif (category == 'M'){\n  \n  \t\t\tif(hours <= 40){\n\n    \t\tgross_wage = M_Pay * hours;\n\t    \tnet_wage = gross_wage * M_Rate/100;\n\t    \tnet_wage = gross_wage - net_wage;\t\n\t\t}\n  \t\telse if (hours > 40)\n  \t\t{\n  \t\n  \t\t\tX_hours = hours - 40;\n  \t\t\tR_hours = hours - X_hours;\n  \t\t\tX_Pay = 15.90 * X_hours;\n  \t\n  \t\t\tgross_wage = M_Pay * R_hours + X_Pay;\n\t\t\tnet_wage = gross_wage * M_Rate/100;\n\t\t\tnet_wage = gross_wage - net_wage;\n  \t\t}\t\n  \t\telse\n \t\t{\n \t\t\tcout<<\"Invalid Input\"<<endl;\n\t\t  }\n\t\t}\n  \n\t\n  \telse if (category == 'F')\n  \t\t{\n  \t\tif (hours <= 40)\n  \t\t\t{\n\t\n    \t\t\tgross_wage = F_Pay * hours;\n\t    \t\tnet_wage = gross_wage * F_Rate/100;\n\t    \t\tnet_wage = gross_wage - net_wage;\t\n\t\t\t}\n  \t\telse if(hours > 40)\n  \t\t{\n  \t\n  \t\t\tX_hours = hours - 40;\n  \t\t\tR_hours = hours - X_hours;\n  \t\t\tX_Pay = 12.45 * X_hours;\n  \t\n  \t\t\tgross_wage = F_Pay * R_hours + X_Pay;\n\t\t\tnet_wage = gross_wage * F_Rate/100;\n\t\t\tnet_wage = gross_wage - net_wage;\n  \t\t}\t\t\n \t\telse\n \t\t{\n \t\t\tcout<<\"Invalid Input\"<<endl;\n\t\t}\n\t\t}\n\telse \n\t\t{\n\t\t\tcout<<\"\\t\\t\\t\\tInvalid Input\\n\"<<endl;\n\t\t}\n\t\n\n\tcout<<\"\\t\\t___________________________\"<<endl;\n\tcout<<\"\\t\\t|Summary:        |        |\\n\";\n\tcout<<\"\\t\\t|----------------|        |\\n\";\n\tcout<<\"\\t\\t|Staff Category: |\"<<category<<\"       |\"<<endl;\n\tcout<<\"\\t\\t|Hours Worked:   |\"<<hours<<\"      |\"<<endl;\n\tcout<<\"\\t\\t|NET WAGE:$      |\"<<net_wage<<\"    |\\n\";\n\tcout<<\"\\t\\t|_________________________|\"<<endl;\n\n\treturn 0;\n}\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\Wage calculator.cpp",
+  "line_numbers": [
+    1,
+    102
+  ]
+}

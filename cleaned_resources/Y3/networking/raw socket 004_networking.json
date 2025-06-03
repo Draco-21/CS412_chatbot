@@ -1,0 +1,16 @@
+{
+  "title": "raw socket 004",
+  "language": "javascript",
+  "topics": [
+    "networking",
+    "machine_learning"
+  ],
+  "purpose": "Open on GitHub The nRF91 Series SiPs support the use of raw sockets, which allow applications to send and receive data at the network layer (Layer 3 in the OSI model) without any transport layer protocol.",
+  "code": "nrf_socket() function with NRF_AF_PACKET as the address family and NRF_SOCK_RAW as the socket type.\nImportant\nA raw socket cannot keep its data separate from the data of another IP socket when both are operating on the same PDN.\nWhen a raw socket is active, it intercepts all downlink data intended for other sockets on the same PDN, which can disrupt\nnormal socket operations.\nIf an application requires the use of raw sockets, it is recommended to use them on a dedicated PDN with a distinct APN to ensure\nthat a separate PDN connection is established. However, in some cases, establishing a truly dedicated PDN may not be feasible,\nand the PDN may still be shared with the default PDN. In those cases, it is advised to close the raw socket before opening any IP\nsockets. This ensures that downlink data is not inadvertently routed to the raw socket, allowing IP sockets to function correctly.\nFor applications that need to use raw sockets, the following code snippet demonstrates how to create a raw socket:\nint fd;\n/* Create a raw socket. */\nfd = nrf_socket(NRF_AF_PACKET, NRF_SOCK_RAW, 0);\nIt is essential for developers to manage the lifecycle of raw sockets carefully and to be aware of the potential for data routing\nconflicts when multiple sockets are in use on the same PDN.\n3\n",
+  "context": "Open on GitHub\nThe nRF91 Series SiPs support the use of raw sockets, which allow applications to send and receive data at the network layer\n(Layer 3 in the OSI model) without any transport layer protocol. To create a raw socket, the application must use the",
+  "source_file": "resources\\Year 3\\Socket Programming\\raw socket 004.pdf",
+  "line_numbers": [
+    9,
+    25
+  ]
+}

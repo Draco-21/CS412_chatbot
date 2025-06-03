@@ -1,7 +1,6 @@
 import streamlit as st
 import os
 import google.generativeai as genai
-from resource_retriever import find_answer_in_resources
 
 # --- THIS SHOULD BE THE FIRST STREAMLIT COMMAND ---
 st.set_page_config(page_title="Coding Assistant Bot (Gemini)", layout="wide")
@@ -36,9 +35,6 @@ def call_external_api(user_message, conversation_history, year_level):
         if any(fw in message_lower for fw in ["springboot", "spring boot", "spring-boot"]):
             target_year = "Year 2"  # Spring Boot content is in Year 2
 
-        # Search in resources first
-        resource_content = find_answer_in_resources(user_message, target_year)
-
         # Prepare the instruction based on year level
         if year_level == "Year 1 Certificate":
             instruction_prefix = "Explain this in very simple terms, like explaining to a beginner. Use basic terminology and give step-by-step explanations: "
@@ -50,12 +46,9 @@ def call_external_api(user_message, conversation_history, year_level):
             instruction_prefix = "Provide an advanced explanation with in-depth technical details and best practices: "
         else:
             instruction_prefix = ""
-
-        # Construct the final prompt
-        if resource_content:
-            final_prompt = f"{instruction_prefix}Based on this reference material:\n{resource_content}\n\nUser Question: {user_message}"
-        else:
-            final_prompt = f"{instruction_prefix}{user_message}"
+            
+            
+        final_prompt = f"{instruction_prefix}{user_message}"
 
         # Prepare conversation history
         gemini_history = [{'role': 'user' if msg['role'] == 'user' else 'model', 'parts': [msg['content']]} for msg in conversation_history]

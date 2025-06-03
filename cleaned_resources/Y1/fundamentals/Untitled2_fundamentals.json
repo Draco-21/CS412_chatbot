@@ -1,0 +1,15 @@
+{
+  "title": "Untitled2",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\nusing namespace std;\n\nint main()\n{\n\tint num1;\n\tint num2;\n\tcout<<\"First Number:\";\n\tcin>>num1;\n\tcout<<\"Second Number:\";\n\tcin>>num2;\n\tcout<<\"Your Number Is \" <<num1/num2 ;\n\t\n\treturn 0;\n}\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\Untitled2.cpp",
+  "line_numbers": [
+    1,
+    16
+  ]
+}

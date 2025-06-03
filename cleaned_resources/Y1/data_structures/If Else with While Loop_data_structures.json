@@ -1,0 +1,18 @@
+{
+  "title": "If Else with While Loop",
+  "language": "cpp",
+  "topics": [
+    "database",
+    "networking",
+    "data_structures",
+    "fundamentals"
+  ],
+  "purpose": "          if (MV == d)",
+  "code": "    {\n        winner = Hotel1;\n\n        draw1 = winner;\n    }\n\n    if (HV == d)\n    {\n        winner = Hotel2;\n\n        draw2 = winner;\n    }\n    if (UV == d)\n    {\n        winner = Hotel3;\n\n        draw3 = winner;\n    }\n    if (GV == d)\n    {\n        winner = Hotel4;\n\n        draw4 = winner;\n    }\n    if (SV == d)\n    {\n        winner = Hotel5;\n\n        draw5 = winner;\n    }\n    else\n    {\n        cout << \"INVALID\";\n    }\n    \n    tvv = (MV + HV + UV + GV + SV);\n    vv = tvv;\n    t_inv = inv;\n\n    tv = tvv + t_inv; //final vote calculation\n\n    pc1 = (MV * percent) / tvv;\n    pc2 = (HV * percent) / tvv;\n    pc3 = (UV * percent) / tvv; //percentage calculation\n    pc4 = (GV * percent) / tvv;\n    pc5 = (SV * percent) / tvv;\n\n    if (selection == 6)\n    {\n        cout << \"\\n\\n\\n\";\n\n        cout << \"\\n\\n\\n\\n\\n\\n\\n *********** FAVORITE FIJIAN HOTEL OPINION POLL *********** \\n\";\n        cout << \" \\t ITEM \\t\\t\\t VOTES \\t\\t\\t % \\n\";\n        cout << \" \\t ---- \\t\\t\\t ----- \\t\\t\\t - \\n\";\n        cout << \" \\t Marriot\"\n             << \" \\t\\t\" << fixed << setprecision(0) << MV << \"\\t\\t\\t\" << fixed << setprecision(1) << pc1 << endl;\n        cout << \" \\t Hilton\"\n             << \" \\t\\t\" << fixed << setprecision(0) << HV << \"\\t\\t\\t\" << fixed << setprecision(1) << pc2 << endl;\n        cout << \" \\t Uprising\"\n             << \" \\t\\t\" << fixed << setprecision(0) << UV << \"\\t\\t\\t\" << fixed << setprecision(1) << pc3 << endl;\n        cout << \" \\t Grand Pacific Hotel\"\n             << \" \\t\" << fixed << setprecision(0) << GV << \"\\t\\t\\t\" << fixed << setprecision(1) << pc4 << endl;\n        cout << \" \\t Sheraton\"\n             << \" \\t\\t\" << fixed << setprecision(0) << SV << \"\\t\\t\\t\" << fixed << setprecision(1) << pc5 << endl\n             << endl;\n\n        cout << \" \\t According to this Poll, the hotel with majority of votes is \" << fixed << setprecision(0) << endl <<endl <<\"\\t\\t\" <<draw1 << endl;\n        cout <<\" \\t\\t\" <<draw2 << endl;\n        cout <<\" \\t\\t\" <<draw3 << endl;\n        cout <<\" \\t\\t\" <<draw4 << endl;\n        cout <<\" \\t\\t\" <<draw5 << \"\\n\\n\";\n\n        cout << \" \\t Total Valid Votes: \\t\\t \" << fixed << setprecision(0) << tvv << endl;\n        cout << \" \\t Total Invalid Votes:  \\t\\t\"\n             << \" \" << fixed << setprecision(0) << t_inv;\n        cout << \" \\t Total votes received: \\t\\t\" << fixed << setprecision(0) << tv;  //final display table\n    }\n\n    return 0;\n}\n",
+  "context": "    \n\n    if (MV == d)",
+  "source_file": "resources\\Year 1\\Practical\\If Else with While Loop.cpp",
+  "line_numbers": [
+    102,
+    182
+  ]
+}

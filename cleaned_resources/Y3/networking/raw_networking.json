@@ -1,0 +1,15 @@
+{
+  "title": "raw",
+  "language": "cpp",
+  "topics": [
+    "networking"
+  ],
+  "purpose": "",
+  "code": "#ifndef RAW_H\n#define RAW_H\n\n/**\n ** The following warnings are displayed during compilation on win32 platforms\n ** using node-gyp:\n **\n **  - C++ exception handler used, but unwind semantics are not enabled.\n **  - no definition for inline function 'v8::Persistent<T> \\\n **       v8::Persistent<T>::New(v8::Handle<T>)'\n **\n ** There don't seem to be any issues which would suggest these are real\n ** problems, so we've disabled them for now.\n **/\n#ifdef _WIN32\n#pragma warning(disable:4506;disable:4530)\n#endif\n\n#include <string>\n\n#include <node.h>\n#include <node_buffer.h>\n#include <nan.h>\n\n#ifdef _WIN32\n#include <winsock2.h>\n#include <Ws2tcpip.h>\n#define SOCKET_ERRNO WSAGetLastError()\n#define SOCKET_OPT_TYPE char *\n#define SOCKET_LEN_TYPE int\n#else\n#include <errno.h>\n#include <unistd.h>\n#include <sys/types.h>\n#include <sys/socket.h>\n#include <fcntl.h>\n#include <netinet/in.h>\n#include <arpa/inet.h>\n#define SOCKET int\n#define SOCKET_ERROR -1\n#define SOCKET_ERRNO errno\n#define INVALID_SOCKET -1\n#define closesocket close\n#define SOCKET_OPT_TYPE void *\n#define SOCKET_LEN_TYPE socklen_t\n#endif\n\nusing namespace v8;\n\nnamespace raw {\n\nNAN_METHOD(CreateChecksum);\n\nvoid ExportConstants (Local<Object> target);\nvoid ExportFunctions (Local<Object> target);\n\nNAN_METHOD(Htonl);\nNAN_METHOD(Htons);\nNAN_METHOD(Ntohl);\nNAN_METHOD(Ntohs);\n\nclass SocketWrap : public Nan::ObjectWrap {\npublic:\n\tvoid HandleIOEvent (int status, int revents);\n\tstatic void Init (Local<Object> exports);\n\nprivate:\n\tSocketWrap ();\n\t~SocketWrap ();\n\n\tstatic NAN_METHOD(Close);\n\n\tvoid CloseSocket (void);\n\t\n\tint CreateSocket (void);\n\n\tstatic NAN_METHOD(GetOption);\n\n\tstatic NAN_METHOD(New);\n\n\tstatic void OnClose (uv_handle_t *handle);\n\n\tstatic NAN_METHOD(Pause);\n\tstatic NAN_METHOD(Recv);\n\tstatic NAN_METHOD(Send);\n\tstatic NAN_METHOD(SetOption);\n\n\tbool no_ip_header_;\n\n\tuint32_t family_;\n\tuint32_t protocol_;\n\n\tSOCKET poll_fd_;\n\tuv_poll_t *poll_watcher_;\n\tbool poll_initialised_;\n\t\n\tbool deconstructing_;\n};\n\nstatic void IoEvent (uv_poll_t* watcher, int status, int revents);\n\n}; /* namespace raw */\n\n#endif /* RAW_H */\n",
+  "context": "",
+  "source_file": "resources\\Year 3\\Socket Programming\\raw.h",
+  "line_numbers": [
+    1,
+    105
+  ]
+}

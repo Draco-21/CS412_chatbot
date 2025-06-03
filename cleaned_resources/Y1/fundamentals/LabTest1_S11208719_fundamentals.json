@@ -1,0 +1,15 @@
+{
+  "title": "LabTest1_S11208719",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream> /*Header File*/       //Name: Yash Pratik Prasad\nusing namespace std; /*Standard library*/  //Student ID: S11208719\n\nint main(){\n\tint option; //option is the choice of game\n\tconst int car = 10; //amount of car racing\n\tconst double mr = 11.50; //amount of motorcycle racing\n\tconst int vr = 16; //amount of virtual reality\n\tconst int vrg = 3; //amount of virtual reality glasses\n\tint carp=0; //calculated price for car racing\n\tint mrp=0; //calculated price for motorcycle racing\n\tint vrp=0; //calculated price for virtual reality\n\tint num=0; //nuumber of players\n\t\n\tcout<<\"\\t\\t\\tGames offered\\t\\tCost Per Person\\n\";\n\tcout<<\"\\t\\t\\t1. Car Racing\\t\\t\\t$10.00\\n\";\n\tcout<<\"\\t\\t\\t2. Motorcycle Racing\\t\\t$11.50\\n\";\n\tcout<<\"\\t\\t\\t3. Virtual Reality - 3D\\t\\t$16.00\\n\\n\";\n\tcout<<\"\\t\\t\\tEnter choice:\"; cin>>option; cout<<\"\\n\"; //Enter choice of game\n\tcout<<\"\\t\\t\\tNumber of players:\"; cin>>num; cout<<\"\\n\\n\"; //Enter number of players\n\t\n\tif(option == 1){\n\t\tcarp = car*num;\n\t\tcout<<\"\\t\\t\\tTotal Payment is $\"<<carp<<endl; //calculate the price if user chooses car racing\n\t}\n\telse if (option == 2){\n\t\tmrp = mr * num;\n\t\tcout<<\"\\t\\t\\tTotal Payment is $\"<<mrp<<endl; //calculate the price if user chooses motorcycle racing\n\t}\n\telse if (option == 3){\n\t\tvrp = (vr*num) + (num*vrg);\n\t\tcout<<\"\\t\\t\\tTotal Payment is $\"<<vrp<<endl; //calculate the price if user chooses virtual reality\n\t}\n\telse\n\t\tcout<<\"\\t\\t\\tINVALID INPUT\"<<endl; //User enters any number other than 1, 2, 3\n\t\t\n\twhile (cin.fail()){\n\t\tcin.clear();\n\t\tstring not_int;\n\t\tcin>>not_int;\n\t\tcout<<\"\\t\\t\\tPlease Retry And Enter A Number From Above \\n\"; //Avoid using letters\n\t\t\n\t}\n\t\n\treturn 0;\n}\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\LabTest1_S11208719.cpp",
+  "line_numbers": [
+    1,
+    47
+  ]
+}

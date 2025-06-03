@@ -1,0 +1,15 @@
+{
+  "title": "Do While Loop",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "\treturn 0;\n}\n",
+  "context": "\t\n\t\n\t",
+  "source_file": "resources\\Year 1\\Practical\\Do While Loop.cpp",
+  "line_numbers": [
+    19,
+    21
+  ]
+}

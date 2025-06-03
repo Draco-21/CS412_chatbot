@@ -1,0 +1,15 @@
+{
+  "title": "While Loop",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\nusing namespace std;\n\t\n\tvoid printstars(int a,int b){\n\t b = b + (b - a + 1)%2;\n\t for(int i = 0; i < a; i++){cout << \" \";}\n\t for(int i = a; i < b; i++){cout << \"*\";}\n\t cout << endl;\n\t}\n\t\n\tbool shrink_and_check(int &left, int &right){\n\tleft++;\n\tright--;\n\treturn (left>right);\n\t}\n\t\n\tint main(){\n\tbool isempty = false;\n\tint start = 10;\n\tint end = 20;\n\twhile(!isempty){\n\t   int length = end - start + 1; \n\t   cout << length << \"\\t\";\n\t   printstars(start,end);\n\t   isempty = shrink_and_check(start,end);\n\t}\n\tcout << endl;\n\treturn 0;\n\t}\n\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\While Loop.cpp",
+  "line_numbers": [
+    1,
+    31
+  ]
+}

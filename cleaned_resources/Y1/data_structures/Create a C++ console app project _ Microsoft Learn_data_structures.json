@@ -1,0 +1,18 @@
+{
+  "title": "Create a C++ console app project _ Microsoft Learn",
+  "language": "unknown",
+  "topics": [
+    "database",
+    "networking",
+    "data_structures",
+    "fundamentals"
+  ],
+  "purpose": "Create your app project: issues The New Project dialog should show a Console App template that has C++, Windows, and Console tags.",
+  "code": "the list of templates. Set them to C++, Windows, and Console. The C++ Console App template should appear; otherwise, the\nDesktop development with C++ workload isn't installed.\nTo install Desktop development with C++, you can run the installer right from the New Project dialog. Choose the Install more\ntools and features link at the bottom of the template list to start the installer. If the User Account Control dialog requests\npermissions, choose Yes. In the installer, make sure the Desktop development with C++ workload is checked. Then choose Modify\nto update your Visual Studio installation.\nIf another project with the same name already exists, choose another name for your project. Or, delete the existing project and try\nagain. To delete an existing project, delete the solution folder (the folder that contains the helloworld.sln file) in File Explorer.\nGo back.\n",
+  "context": "Create your app project: issues\nThe New Project dialog should show a Console App template that has C++, Windows, and Console tags. If you don't see it, there\nare two possible causes. It might be filtered out of the list, or it might not be installed. First, check the filter dropdowns at the top of",
+  "source_file": "resources\\Year 1\\C++ Docs\\Create a C++ console app project _ Microsoft Learn.pdf",
+  "line_numbers": [
+    28,
+    37
+  ]
+}

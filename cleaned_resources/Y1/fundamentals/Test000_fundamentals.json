@@ -1,0 +1,15 @@
+{
+  "title": "Test000",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\n#include <stdlib.h>\n\nusing namespace std;\n\nint main(){\n\tint guess;\n\tguess = rand() %11;\n\tcout<<guess<<endl;\t\t\n\n return 0;\n}\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\Test000.cpp",
+  "line_numbers": [
+    1,
+    13
+  ]
+}

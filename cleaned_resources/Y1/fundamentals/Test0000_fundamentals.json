@@ -1,0 +1,15 @@
+{
+  "title": "Test0000",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\n#include <cstdlib>\n#include <string>\n#include <ctime>\n\nusing namespace std;\n\n  int main(){\n    int j;\n    for(int i = 10; i>=0; i--)\n       for(j = 0; j != 3; j++){\n         cout << i+j << \",\\t\";\n       }\n       cout << endl;\n    \n  \n  return 0;\n }\n\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\Test0000.cpp",
+  "line_numbers": [
+    1,
+    20
+  ]
+}

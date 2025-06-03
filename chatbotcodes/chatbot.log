@@ -1,0 +1,243 @@
+2025-06-03 13:10:04,509 - INFO - Initializing SmartResourceRetriever
+2025-06-03 13:10:04,513 - ERROR - Resources directory not found: cleaned_resources
+2025-06-03 13:10:04,513 - INFO - SmartResourceRetriever initialized with 0 resources
+2025-06-03 13:10:04,516 - DEBUG - Starting Coding Assistant Chatbot
+2025-06-03 13:10:18,413 - DEBUG - Starting Coding Assistant Chatbot
+2025-06-03 13:10:18,419 - DEBUG - Received new user query: can you give me a simple program in c++?
+2025-06-03 13:10:18,421 - DEBUG - Processing query: 'can you give me a simple program in c++?' for Year 1 Certificate
+2025-06-03 13:10:18,425 - DEBUG - Query analysis: QueryAnalysis(code_language='cpp', frameworks=[], topic_category='general', query_type='code', keywords=['can', 'you', 'give', 'simple', 'program'], year_level='Year 1 Certificate')
+2025-06-03 13:10:18,426 - DEBUG - Searching for relevant resources...
+2025-06-03 13:10:18,427 - INFO - Searching for: 'can you give me a simple program in c++?' (year level: Year 1 Certificate)
+2025-06-03 13:10:22,025 - DEBUG - Query tokens: ['give', 'simple', 'program']
+2025-06-03 13:10:22,025 - DEBUG - Detected languages: ['cpp']
+2025-06-03 13:10:22,026 - DEBUG - Detected topics: []
+2025-06-03 13:10:22,026 - INFO - Found 0 matches above score 0.2
+2025-06-03 13:10:22,026 - DEBUG - Found 0 resource matches
+2025-06-03 13:10:22,026 - DEBUG - No local resources found, falling back to API generator
+2025-06-03 13:10:30,009 - DEBUG - API response generated successfully
+2025-06-03 13:23:31,076 - INFO - Initializing SmartResourceRetriever
+2025-06-03 13:23:31,078 - ERROR - Resources directory not found: cleaned_resources
+2025-06-03 13:23:31,078 - INFO - SmartResourceRetriever initialized with 0 resources
+2025-06-03 13:23:31,080 - DEBUG - Starting Coding Assistant Chatbot
+2025-06-03 13:23:34,898 - DEBUG - Starting Coding Assistant Chatbot
+2025-06-03 13:23:34,900 - DEBUG - Received new user query: can u give me a simple program in c++?
+2025-06-03 13:23:34,902 - DEBUG - Processing query: 'can u give me a simple program in c++?' for Year 1 Certificate
+2025-06-03 13:23:34,905 - DEBUG - Query analysis: QueryAnalysis(code_language='cpp', frameworks=[], topic_category='general', query_type='code', keywords=['can', 'give', 'simple', 'program'], year_level='Year 1 Certificate')
+2025-06-03 13:23:34,905 - DEBUG - Searching for relevant resources...
+2025-06-03 13:23:34,906 - INFO - Searching for: 'can u give me a simple program in c++?' (year level: Year 1 Certificate)
+2025-06-03 13:23:38,248 - DEBUG - Query tokens: ['u', 'give', 'simple', 'program']
+2025-06-03 13:23:38,248 - DEBUG - Detected languages: ['cpp']
+2025-06-03 13:23:38,248 - DEBUG - Detected topics: ['fundamentals']
+2025-06-03 13:23:38,249 - INFO - Found 0 matches above score 0.2
+2025-06-03 13:23:38,249 - DEBUG - Found 0 resource matches
+2025-06-03 13:23:38,249 - DEBUG - No local resources found, falling back to API generator
+2025-06-03 13:23:44,679 - DEBUG - API response generated successfully
+2025-06-03 14:39:18,396 - INFO - Initializing SmartResourceRetriever
+2025-06-03 14:39:18,401 - ERROR - Resources directory not found: C:\Users\yashp\Desktop\CS412_Chatbot-Project\chatbotcodes\cleaned_resources
+2025-06-03 14:39:18,401 - INFO - SmartResourceRetriever initialized with 0 resources
+2025-06-03 14:39:18,404 - DEBUG - Starting Coding Assistant Chatbot
+2025-06-03 14:39:27,992 - DEBUG - Starting Coding Assistant Chatbot
+2025-06-03 14:39:27,997 - DEBUG - Received new user query: can u give me a simple program in c++?
+2025-06-03 14:39:28,004 - DEBUG - Processing query: 'can u give me a simple program in c++?' for Year 1 Certificate
+2025-06-03 14:39:28,009 - DEBUG - Query analysis: QueryAnalysis(code_language='cpp', frameworks=[], topic_category='general', query_type='code', keywords=['can', 'give', 'simple', 'program'], year_level='Year 1 Certificate')
+2025-06-03 14:39:28,010 - DEBUG - Searching for relevant resources...
+2025-06-03 14:39:28,010 - INFO - Searching for: 'can u give me a simple program in c++?' (year level: Year 1 Certificate)
+2025-06-03 14:39:32,687 - DEBUG - Query tokens: ['u', 'give', 'simple', 'program']
+2025-06-03 14:39:32,688 - DEBUG - Detected languages: ['cpp']
+2025-06-03 14:39:32,688 - DEBUG - Detected topics: ['fundamentals']
+2025-06-03 14:39:32,689 - INFO - Found 0 matches above score 0.2
+2025-06-03 14:39:32,689 - DEBUG - Found 0 resource matches
+2025-06-03 14:39:32,689 - DEBUG - No local resources found, falling back to API generator
+2025-06-03 14:39:40,028 - DEBUG - API response generated successfully
+2025-06-03 14:46:02,920 - INFO - Initializing SmartResourceRetriever
+2025-06-03 14:46:02,935 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\C++ Data Structure_data_structures.json
+2025-06-03 14:46:02,940 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\C++ Documentation_data_structures.json
+2025-06-03 14:46:02,942 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\Create a C++ console app project _ Microsoft Learn_data_structures.json
+2025-06-03 14:46:02,944 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\CS111 Assign1S11208719 Writeup_data_structures.json
+2025-06-03 14:46:02,948 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\CS111 Lab 3_data_structures.json
+2025-06-03 14:46:02,950 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\CS111 Lecture 1.3_data_structures.json
+2025-06-03 14:46:02,953 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\CS111 Lecture 5.1_data_structures.json
+2025-06-03 14:46:02,955 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\CS111 Lecture 5.3_data_structures.json
+2025-06-03 14:46:02,973 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\Data Structures and Algorithms in C++, 2nd edition_data_structures.json
+2025-06-03 14:46:02,974 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\For Loop Array_data_structures.json
+2025-06-03 14:46:02,977 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\If Else with While Loop_data_structures.json
+2025-06-03 14:46:02,979 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\If Else_data_structures.json
+2025-06-03 14:46:02,980 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\Input For Loop Array_data_structures.json
+2025-06-03 14:46:02,982 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\Test Subject_data_structures.json
+2025-06-03 14:46:02,983 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\data_structures\Welcome back to C++ - Modern C++ _ Microsoft Learn_data_structures.json
+2025-06-03 14:46:02,987 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\C++ Data Structure_fundamentals.json
+2025-06-03 14:46:02,990 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\C++ Documentation_fundamentals.json
+2025-06-03 14:46:02,992 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Change Calaculator_fundamentals.json
+2025-06-03 14:46:02,992 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Create a C++ console app project _ Microsoft Learn_fundamentals.json
+2025-06-03 14:46:02,994 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Assign1S11208719 Writeup_fundamentals.json
+2025-06-03 14:46:02,994 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 1.3_fundamentals.json
+2025-06-03 14:46:02,996 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 2.1_fundamentals.json
+2025-06-03 14:46:02,997 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 2.2_fundamentals.json
+2025-06-03 14:46:02,998 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 4.1_fundamentals.json
+2025-06-03 14:46:02,999 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 4.2_fundamentals.json
+2025-06-03 14:46:03,000 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 5.1_fundamentals.json
+2025-06-03 14:46:03,001 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 5.2_fundamentals.json
+2025-06-03 14:46:03,003 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 5.3_fundamentals.json
+2025-06-03 14:46:03,004 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 6_fundamentals.json
+2025-06-03 14:46:03,006 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\CS111 Lecture 7_fundamentals.json
+2025-06-03 14:46:03,024 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Data Structures and Algorithms in C++, 2nd edition_fundamentals.json
+2025-06-03 14:46:03,026 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Do While Loop_fundamentals.json
+2025-06-03 14:46:03,027 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\For Loop Array_fundamentals.json
+2025-06-03 14:46:03,028 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\For Loop Summation_fundamentals.json
+2025-06-03 14:46:03,029 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\For Loop_fundamentals.json
+2025-06-03 14:46:03,029 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\If Else with While Loop_fundamentals.json
+2025-06-03 14:46:03,030 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Input For Loop Array_fundamentals.json
+2025-06-03 14:46:03,031 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Input with Addition_fundamentals.json
+2025-06-03 14:46:03,032 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Lab Week 8(For Loop)_fundamentals.json
+2025-06-03 14:46:03,033 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Lab Week 8(modulus)_fundamentals.json
+2025-06-03 14:46:03,034 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\LabTest1_S11208719_fundamentals.json
+2025-06-03 14:46:03,035 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Simplest Program_fundamentals.json
+2025-06-03 14:46:03,035 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Summation_fundamentals.json
+2025-06-03 14:46:03,037 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Taking Input_fundamentals.json
+2025-06-03 14:46:03,038 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Tesst_fundamentals.json
+2025-06-03 14:46:03,039 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Test0000_fundamentals.json
+2025-06-03 14:46:03,040 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Test000_fundamentals.json
+2025-06-03 14:46:03,041 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Test_fundamentals.json
+2025-06-03 14:46:03,043 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Untitled2_fundamentals.json
+2025-06-03 14:46:03,044 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Untitled3_fundamentals.json
+2025-06-03 14:46:03,045 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Untld_fundamentals.json
+2025-06-03 14:46:03,046 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Wage calculator_fundamentals.json
+2025-06-03 14:46:03,047 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Wages Calculator (shivnit)_fundamentals.json
+2025-06-03 14:46:03,048 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Week 8(While Loop)_fundamentals.json
+2025-06-03 14:46:03,048 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\Welcome back to C++ - Modern C++ _ Microsoft Learn_fundamentals.json
+2025-06-03 14:46:03,049 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\While Loop Testing_fundamentals.json
+2025-06-03 14:46:03,050 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y1\fundamentals\While Loop_fundamentals.json
+2025-06-03 14:46:03,054 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\android_studios_algorithms.json
+2025-06-03 14:46:03,056 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\android_tutorial_algorithms.json
+2025-06-03 14:46:03,059 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\asp.net documentation_algorithms.json
+2025-06-03 14:46:03,065 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\Assembly Language Programming Lecture Notes - Belal Hashmi_algorithms.json
+2025-06-03 14:46:03,082 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\Data Structures and Algorithms in Java, 6th Edition_algorithms.json
+2025-06-03 14:46:03,085 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\introduction-to-matlab_algorithms.json
+2025-06-03 14:46:03,088 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\MOBILE APPLICATION DEVELOPMENT DIGITAL NOTES(R18A1207)_algorithms.json
+2025-06-03 14:46:03,091 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\mysql_algorithms.json
+2025-06-03 14:46:03,098 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\algorithms\spring boot documentation_algorithms.json
+2025-06-03 14:46:03,102 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\android_studios_database.json
+2025-06-03 14:46:03,104 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\android_tutorial_database.json
+2025-06-03 14:46:03,106 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\asp.net documentation_database.json
+2025-06-03 14:46:03,112 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\Assembly Language Programming Lecture Notes - Belal Hashmi_database.json
+2025-06-03 14:46:03,114 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\binary coding_database.json
+2025-06-03 14:46:03,131 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\Data Structures and Algorithms in Java, 6th Edition_database.json
+2025-06-03 14:46:03,133 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\ethernet_database.json
+2025-06-03 14:46:03,135 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\introduction-to-matlab_database.json
+2025-06-03 14:46:03,138 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\MOBILE APPLICATION DEVELOPMENT DIGITAL NOTES(R18A1207)_database.json
+2025-06-03 14:46:03,141 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\mysql_database.json
+2025-06-03 14:46:03,149 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\spring boot documentation_database.json
+2025-06-03 14:46:03,151 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\database\Wombat Machine_database.json
+2025-06-03 14:46:03,154 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\android_studios_web_dev.json
+2025-06-03 14:46:03,156 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\android_tutorial_web_dev.json
+2025-06-03 14:46:03,158 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\asp.net documentation_web_dev.json
+2025-06-03 14:46:03,165 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\Assembly Language Programming Lecture Notes - Belal Hashmi_web_dev.json
+2025-06-03 14:46:03,167 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\binary coding_web_dev.json
+2025-06-03 14:46:03,185 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\Data Structures and Algorithms in Java, 6th Edition_web_dev.json
+2025-06-03 14:46:03,187 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\ethernet_web_dev.json
+2025-06-03 14:46:03,189 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\introduction-to-matlab_web_dev.json
+2025-06-03 14:46:03,191 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\MOBILE APPLICATION DEVELOPMENT DIGITAL NOTES(R18A1207)_web_dev.json
+2025-06-03 14:46:03,198 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\mysql_web_dev.json
+2025-06-03 14:46:03,205 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y2\web_dev\spring boot documentation_web_dev.json
+2025-06-03 14:46:03,217 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\c-api_database.json
+2025-06-03 14:46:03,222 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\extending_database.json
+2025-06-03 14:46:03,227 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\faq_database.json
+2025-06-03 14:46:03,230 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-annotations_database.json
+2025-06-03 14:46:03,232 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-argparse_database.json
+2025-06-03 14:46:03,233 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-curses_database.json
+2025-06-03 14:46:03,235 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-descriptor_database.json
+2025-06-03 14:46:03,238 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-enum_database.json
+2025-06-03 14:46:03,240 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-free-threading-extensions_database.json
+2025-06-03 14:46:03,241 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-functional_database.json
+2025-06-03 14:46:03,243 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-gdb_helpers_database.json
+2025-06-03 14:46:03,246 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-instrumentation_database.json
+2025-06-03 14:46:03,247 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-isolating-extensions_database.json
+2025-06-03 14:46:03,250 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-logging-cookbook_database.json
+2025-06-03 14:46:03,252 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-logging_database.json
+2025-06-03 14:46:03,254 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-perf_profiling_database.json
+2025-06-03 14:46:03,256 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-regex_database.json
+2025-06-03 14:46:03,258 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-sockets_database.json
+2025-06-03 14:46:03,261 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-sorting_database.json
+2025-06-03 14:46:03,264 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-timerfd_database.json
+2025-06-03 14:46:03,265 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-unicode_database.json
+2025-06-03 14:46:03,267 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\howto-urllib2_database.json
+2025-06-03 14:46:03,269 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\installing_database.json
+2025-06-03 14:46:03,323 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\library_database.json
+2025-06-03 14:46:03,326 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\Python Flask Manual_database.json
+2025-06-03 14:46:03,331 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\python flask_database.json
+2025-06-03 14:46:03,335 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\PythonSocketProgramming_database.json
+2025-06-03 14:46:03,337 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\raw socket 02_database.json
+2025-06-03 14:46:03,339 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\Raw Socket_database.json
+2025-06-03 14:46:03,341 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\raw-socket-demystified_database.json
+2025-06-03 14:46:03,348 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\reference_database.json
+2025-06-03 14:46:03,351 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\Socket Programming_database.json
+2025-06-03 14:46:03,354 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\tutorial_database.json
+2025-06-03 14:46:03,358 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\using_database.json
+2025-06-03 14:46:03,361 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\whatsnew_database.json
+2025-06-03 14:46:03,363 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\database\www-opensourceforu-com-2015-03-a-guide-to-using-raw-sockets-_database.json
+2025-06-03 14:46:03,372 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\c-api_networking.json
+2025-06-03 14:46:03,377 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\extending_networking.json
+2025-06-03 14:46:03,381 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\faq_networking.json
+2025-06-03 14:46:03,383 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-argparse_networking.json
+2025-06-03 14:46:03,385 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-curses_networking.json
+2025-06-03 14:46:03,387 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-descriptor_networking.json
+2025-06-03 14:46:03,389 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-enum_networking.json
+2025-06-03 14:46:03,391 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-free-threading-extensions_networking.json
+2025-06-03 14:46:03,393 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-free-threading-python_networking.json
+2025-06-03 14:46:03,394 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-functional_networking.json
+2025-06-03 14:46:03,397 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-gdb_helpers_networking.json
+2025-06-03 14:46:03,398 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-instrumentation_networking.json
+2025-06-03 14:46:03,401 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-ipaddress_networking.json
+2025-06-03 14:46:03,402 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-isolating-extensions_networking.json
+2025-06-03 14:46:03,405 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-logging-cookbook_networking.json
+2025-06-03 14:46:03,408 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-logging_networking.json
+2025-06-03 14:46:03,409 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-mro_networking.json
+2025-06-03 14:46:03,411 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-perf_profiling_networking.json
+2025-06-03 14:46:03,413 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-regex_networking.json
+2025-06-03 14:46:03,415 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-sockets_networking.json
+2025-06-03 14:46:03,417 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-sorting_networking.json
+2025-06-03 14:46:03,418 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-timerfd_networking.json
+2025-06-03 14:46:03,420 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-unicode_networking.json
+2025-06-03 14:46:03,422 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\howto-urllib2_networking.json
+2025-06-03 14:46:03,424 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\installing_networking.json
+2025-06-03 14:46:03,481 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\library_networking.json
+2025-06-03 14:46:03,485 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\Python Flask Manual_networking.json
+2025-06-03 14:46:03,492 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\python flask_networking.json
+2025-06-03 14:46:03,494 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\PythonSocketProgramming_networking.json
+2025-06-03 14:46:03,496 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\raw socket 004_networking.json
+2025-06-03 14:46:03,500 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\raw socket 02_networking.json
+2025-06-03 14:46:03,502 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\Raw Socket_networking.json
+2025-06-03 14:46:03,504 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\raw-socket-demystified_networking.json
+2025-06-03 14:46:03,505 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\raw_networking.json
+2025-06-03 14:46:03,512 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\reference_networking.json
+2025-06-03 14:46:03,515 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\Socket Programming_networking.json
+2025-06-03 14:46:03,520 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\tutorial_networking.json
+2025-06-03 14:46:03,523 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\using_networking.json
+2025-06-03 14:46:03,527 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\whatsnew_networking.json
+2025-06-03 14:46:03,529 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y3\networking\www-opensourceforu-com-2015-03-a-guide-to-using-raw-sockets-_networking.json
+2025-06-03 14:46:03,532 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\algorithms\Feasibility Learning_algorithms.json
+2025-06-03 14:46:03,535 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\algorithms\fuzzy robust auto park_algorithms.json
+2025-06-03 14:46:03,537 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\algorithms\gradient descent_algorithms.json
+2025-06-03 14:46:03,539 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\algorithms\Learning Problem_algorithms.json
+2025-06-03 14:46:03,540 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\algorithms\Machine Learning Foundations_algorithms.json
+2025-06-03 14:46:03,543 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\algorithms\Perceptron Algorithm_algorithms.json
+2025-06-03 14:46:03,544 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\algorithms\Perceptrons_algorithms.json
+2025-06-03 14:46:03,545 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\algorithms\Research Paper on back Propagation with figures_algorithms.json
+2025-06-03 14:46:03,548 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\Feasibility Learning_machine_learning.json
+2025-06-03 14:46:03,550 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\fuzzy robust auto park_machine_learning.json
+2025-06-03 14:46:03,553 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\Learning Problem_machine_learning.json
+2025-06-03 14:46:03,554 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\Linear Models 1_machine_learning.json
+2025-06-03 14:46:03,556 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\Machine Learning Foundations_machine_learning.json
+2025-06-03 14:46:03,557 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\Neural Networks_machine_learning.json
+2025-06-03 14:46:03,560 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\Perceptron Algorithm_machine_learning.json
+2025-06-03 14:46:03,562 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\Perceptrons_machine_learning.json
+2025-06-03 14:46:03,564 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\machine_learning\Research Paper on back Propagation with figures_machine_learning.json
+2025-06-03 14:46:03,567 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\networking\fuzzy robust auto park_networking.json
+2025-06-03 14:46:03,568 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\networking\gradient descent_networking.json
+2025-06-03 14:46:03,570 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\networking\Machine Learning Foundations_networking.json
+2025-06-03 14:46:03,572 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\networking\Neural Networks_networking.json
+2025-06-03 14:46:03,574 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\networking\Perceptron Algorithm_networking.json
+2025-06-03 14:46:03,575 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\networking\Perceptrons_networking.json
+2025-06-03 14:46:03,577 - DEBUG - Loaded resource: C:\Users\yashp\Desktop\CS412_Chatbot-Project\cleaned_resources\Y4\networking\Research Paper on back Propagation with figures_networking.json
+2025-06-03 14:46:03,580 - INFO - SmartResourceRetriever initialized with 189 resources
+2025-06-03 14:46:03,583 - DEBUG - Starting Coding Assistant Chatbot

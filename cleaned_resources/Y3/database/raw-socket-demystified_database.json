@@ -1,0 +1,21 @@
+{
+  "title": "raw-socket-demystified",
+  "language": "cpp",
+  "topics": [
+    "machine_learning",
+    "web_dev",
+    "fundamentals",
+    "algorithms",
+    "networking",
+    "data_structures",
+    "database"
+  ],
+  "purpose": " ------",
+  "code": "From: http://sock-raw.org/papers/sock_raw\n",
+  "context": "\n------\n",
+  "source_file": "resources\\Year 3\\Socket Programming\\raw-socket-demystified.txt",
+  "line_numbers": [
+    1942,
+    1943
+  ]
+}

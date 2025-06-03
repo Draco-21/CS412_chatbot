@@ -1,0 +1,15 @@
+{
+  "title": "Wages Calculator (shivnit)",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\nusing namespace std;\n\nint main(){\n\tstring id;\n\tstring name;\n\tconst double rate = 11.25;\n\tdouble hrs;\n\tconst int fee = 50;\n\tdouble gpay = 0;\n\tdouble deduc = 0;\n\tdouble final_pay = 0;\n\tdouble retire;\n\t\n\t\n\tcout<<\"Please enter your ID:\";\n\tcin >> id; cout<<endl;\n\t\n\tcout<<\"Please enter your Full Name:\";\n\tcin >> name; cout <<endl;\n\t\n\tcout<<\"Please enter hours worked:\";\n\tcin >> hrs; cout << endl;\n\t\n\tgpay = rate * hrs; \n\t\n\tretire = 0.1 * gpay;\n\t\n\tdeduc = fee + retire; \n\t\n\tfinal_pay = gpay - deduc;\n\t\n\tcout<<\"Name: \"<<name<<endl;\n\tcout<<\"ID: \"<<id<<endl;\n\tcout<<\"Gross Pay: \"<<gpay<<endl;\n\tcout<<\"Deductions: \"<<deduc<<endl;\n\tcout<<\"Take Home Pay: \"<<final_pay<<endl;\n\t\n\treturn 0;\n}\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\Wages Calculator (shivnit).cpp",
+  "line_numbers": [
+    1,
+    41
+  ]
+}

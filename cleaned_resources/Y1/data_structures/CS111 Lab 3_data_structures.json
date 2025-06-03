@@ -1,0 +1,15 @@
+{
+  "title": "CS111 Lab 3",
+  "language": "cpp",
+  "topics": [
+    "data_structures"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\nusing namespace std;\n\nint main()\n{\n\n\tcout <<\"\\n\\tGrade List for CS111\"<<\"\\t--------------------\\n\\n\";\n\tcout <<\"\\tGoogle Smith\\t\\tA\" <<endl; \n\tcout <<\"\\tJohn Pencil\\t\\tB\"<<endl;\n\tcout<<\"\\tMr. Football\\t\\tC\"<<endl; \n\tcout << \"\\tJason Stone\\t\\tB+\"<<endl;\n\tcout<<\"\\tStapler Pin\\t\\tA+\"<<endl;\n\tcout << \"\\tManila Folder\\t\\tC+\"<< endl;\n\tcout<<\"\\tKeyboard Hunter\\t\\tD\"<<endl; \n\tcout <<\"\\tSystem Speaker\\t\\tE\"<<endl;\n\treturn 0;\n}\n\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\CS111 Lab 3.cpp",
+  "line_numbers": [
+    1,
+    19
+  ]
+}

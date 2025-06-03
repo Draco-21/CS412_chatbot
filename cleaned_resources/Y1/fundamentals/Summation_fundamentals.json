@@ -1,0 +1,15 @@
+{
+  "title": "Summation",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\nusing namespace std;\n\nint main()\n{\n\tint sum1 = 150 + 50;\n\tint sum2 = sum1 + 100;\n\tint sum3 = sum2 + sum2;\n\tint sum = sum3;\n\tcout<<\"sum is  \"<<sum;\n\treturn 0; \n}\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\Summation.cpp",
+  "line_numbers": [
+    1,
+    13
+  ]
+}

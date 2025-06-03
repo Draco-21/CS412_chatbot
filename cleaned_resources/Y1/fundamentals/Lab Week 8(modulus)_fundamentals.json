@@ -1,0 +1,15 @@
+{
+  "title": "Lab Week 8(modulus)",
+  "language": "cpp",
+  "topics": [
+    "fundamentals"
+  ],
+  "purpose": "",
+  "code": "#include <iostream>\nusing namespace std;\n\n\nint main(){\n\t\n\tint sum = 0;\n\tint i = 1;\n\t\n\twhile(i < 1000){\n\t\t\n\t\tif(i % 7 == 0)\n\t\n\t\tsum = sum + i;\n\t\ti++;\n\t\t}\n\t\t\n\tcout<<\"The Sum is \"<<sum;\n\t\n\treturn 0;\n}\n",
+  "context": "",
+  "source_file": "resources\\Year 1\\Practical\\Lab Week 8(modulus).cpp",
+  "line_numbers": [
+    1,
+    22
+  ]
+}
