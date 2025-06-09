@@ -14,9 +14,15 @@ import concurrent.futures
 import hashlib
 from threading import Lock
 import nltk
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sentence_transformers import SentenceTransformer
+import numpy as np
+from collections import defaultdict
+from chatbotcodes.models import ResourceMatch
 
 RESOURCES_BASE_FOLDER = "cleaned_resources"
 YEAR_FOLDER_MAP = {
@@ -32,7 +38,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler('resource_retrieval.log')
+        logging.FileHandler('chatbot.log')
     ]
 )
 logger = logging.getLogger(__name__)
@@ -209,6 +215,9 @@ class ResourceMatch:
     context: str
     source_file: str
     topics: List[str]
+    framework_name: str = ""
+    framework_version: str = ""
+    difficulty_level: str = ""
     score: float = 0.0
 
 class SmartResourceRetriever:
@@ -218,34 +227,107 @@ class SmartResourceRetriever:
         self._content_cache = {}  # File path -> content cache
         self._cache_lock = Lock()  # Thread-safe cache access
         self._keyword_cache = {}   # Query -> keywords cache
+        self._embedding_cache = {}  # Text -> embedding cache
         
         # Initialize NLP tools
         self.lemmatizer = WordNetLemmatizer()
         self.stop_words = set(stopwords.words('english'))
+        self.tfidf_vectorizer = TfidfVectorizer(
+            tokenizer=self._preprocess_text,
+            stop_words='english',
+            ngram_range=(1, 2)
+        )
         
-        # Topic categories for search optimization
+        # Initialize sentence transformer model for semantic embeddings
+        self.sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2')
+        
+        # Enhanced topic categories with hierarchical structure
         self.topic_categories = {
-            'fundamentals': ['basic', 'syntax', 'variable', 'loop', 'condition'],
-            'data_structures': ['array', 'list', 'tree', 'graph', 'stack', 'queue'],
-            'algorithms': ['sort', 'search', 'recursion', 'complexity'],
-            'web_dev': ['html', 'css', 'javascript', 'api'],
-            'database': ['sql', 'query', 'table', 'database'],
-            'networking': ['tcp', 'ip', 'socket', 'protocol'],
-            'machine_learning': ['ml', 'neural', 'training', 'model']
+            'fundamentals': {
+                'basic_concepts': ['syntax', 'variable', 'datatype', 'operator'],
+                'control_flow': ['loop', 'condition', 'function', 'recursion'],
+                'error_handling': ['exception', 'try', 'catch', 'debug']
+            },
+            'data_structures': {
+                'linear': ['array', 'list', 'stack', 'queue'],
+                'hierarchical': ['tree', 'heap', 'binary'],
+                'graph': ['graph', 'network', 'vertex', 'edge'],
+                'hash': ['hash', 'map', 'dictionary', 'set']
+            },
+            'algorithms': {
+                'searching': ['search', 'binary search', 'linear search'],
+                'sorting': ['sort', 'quicksort', 'mergesort'],
+                'optimization': ['dynamic', 'greedy', 'backtrack'],
+                'complexity': ['time complexity', 'space complexity', 'big o']
+            },
+            'web_dev': {
+                'frontend': ['html', 'css', 'javascript', 'react'],
+                'backend': ['api', 'server', 'database', 'rest'],
+                'security': ['authentication', 'authorization', 'encryption']
+            }
         }
         
-        # Programming languages for search optimization
+        # Enhanced programming language detection
         self.programming_languages = {
-            'python': ['python', 'django', 'flask', 'pandas'],
-            'cpp': ['c++', 'cpp', 'vector', 'iostream'],
-            'java': ['java', 'spring', 'hibernate'],
-            'javascript': ['js', 'node', 'react', 'angular']
+            'python': {
+                'core': ['python', 'def', 'class', 'import'],
+                'frameworks': ['django', 'flask', 'fastapi'],
+                'libraries': ['pandas', 'numpy', 'tensorflow']
+            },
+            'cpp': {
+                'core': ['c++', 'cpp', 'iostream', 'vector'],
+                'stl': ['std::', 'template', 'container'],
+                'features': ['pointer', 'reference', 'memory']
+            },
+            'java': {
+                'core': ['java', 'class', 'interface', 'package'],
+                'frameworks': ['spring', 'hibernate', 'junit'],
+                'features': ['inheritance', 'polymorphism', 'encapsulation']
+            },
+            'javascript': {
+                'core': ['js', 'function', 'const', 'let'],
+                'frontend': ['dom', 'event', 'react', 'vue'],
+                'backend': ['node', 'express', 'npm']
+            }
         }
         
         # Load and cache all resources on initialization
         self._load_all_resources()
         
         logger.info(f"SmartResourceRetriever initialized with {len(self._content_cache)} resources")
+
+    def format_matches_for_display(self, matches: List[ResourceMatch]) -> str:
+        """Format resource matches into a readable string format."""
+        if not matches:
+            return "No relevant matches found."
+        
+        formatted_output = []
+        for i, match in enumerate(matches, 1):
+            formatted_match = f"\n### Match {i}: {match.title}\n"
+            formatted_match += f"Language: {match.language}\n"
+            formatted_match += f"Purpose: {match.purpose}\n"
+            
+            if match.context:
+                formatted_match += f"Context: {match.context}\n"
+            
+            formatted_match += f"\n```{match.language}\n{match.code}\n```\n"
+            
+            if match.topics:
+                formatted_match += f"\nTopics: {', '.join(match.topics)}\n"
+            
+            if match.framework_name:
+                formatted_match += f"Framework: {match.framework_name}"
+                if match.framework_version:
+                    formatted_match += f" (v{match.framework_version})"
+                formatted_match += "\n"
+            
+            if match.difficulty_level:
+                formatted_match += f"Difficulty: {match.difficulty_level}\n"
+            
+            formatted_match += f"Relevance Score: {match.score:.2f}\n"
+            formatted_output.append(formatted_match)
+        
+        return "\n".join(formatted_output)
 
     def _load_all_resources(self):
         """Load all JSON resources into memory cache."""
@@ -269,221 +351,224 @@ class SmartResourceRetriever:
             logger.error(f"Error loading resources: {str(e)}")
 
     def _preprocess_text(self, text: str) -> List[str]:
-        """Preprocess text into lemmatized tokens."""
-        # Tokenize and convert to lowercase
+        """Enhanced text preprocessing with better tokenization and normalization."""
+        # Convert to lowercase and tokenize
         tokens = word_tokenize(text.lower())
         
-        # Remove stopwords and lemmatize
-        tokens = [self.lemmatizer.lemmatize(token) 
-                 for token in tokens 
-                 if token not in self.stop_words and token.isalnum()]
-        
-        return tokens
-
-    def _detect_topics_and_language(self, query: str) -> Dict[str, List[str]]:
-        """Detect programming languages and topics from the query."""
-        query_lower = query.lower()
-        detected = {
-            'languages': [],
-            'topics': []
+        # Custom handling for common programming terms
+        programming_terms = {
+            'programming': 'program',
+            'programs': 'program',
+            'algorithmic': 'algorithm',
+            'algorithms': 'algorithm'
         }
         
-        # Enhanced language detection
-        for lang, keywords in self.programming_languages.items():
-            # Check for explicit language mentions
-            if any(keyword in query_lower for keyword in keywords):
-                detected['languages'].append(lang)
-                break
+        # Remove stopwords and lemmatize with custom handling
+        processed_tokens = []
+        for token in tokens:
+            if token not in self.stop_words and token.isalnum():
+                # Check for custom mappings first
+                if token in programming_terms:
+                    processed_tokens.append(programming_terms[token])
+                else:
+                    lemmatized = self.lemmatizer.lemmatize(token)
+                    processed_tokens.append(lemmatized)
         
-        # If no language detected but query contains code-like patterns
-        if not detected['languages']:
-            if any(pattern in query_lower for pattern in 
-                  ['program', 'code', 'function', 'class', 'algorithm']):
-                # Default to C++ for basic programming queries
-                detected['languages'].append('cpp')
+        # Add bigrams for better context
+        bigrams = [f"{processed_tokens[i]}_{processed_tokens[i+1]}" 
+                  for i in range(len(processed_tokens)-1)]
         
-        # Enhanced topic detection
-        for topic, keywords in self.topic_categories.items():
-            if any(keyword in query_lower for keyword in keywords):
-                detected['topics'].append(topic)
+        return processed_tokens + bigrams
+
+    def _get_text_embedding(self, text: str) -> np.ndarray:
+        """Get or compute embedding for text using sentence transformer."""
+        if text in self._embedding_cache:
+            return self._embedding_cache[text]
+            
+        embedding = self.sentence_transformer.encode(text, convert_to_tensor=True)
+        self._embedding_cache[text] = embedding
+        return embedding
+
+    def _calculate_semantic_similarity(self, text1: str, text2: str) -> float:
+        """Calculate semantic similarity between two texts using embeddings."""
+        emb1 = self._get_text_embedding(text1)
+        emb2 = self._get_text_embedding(text2)
+        return float(cosine_similarity(emb1.reshape(1, -1), emb2.reshape(1, -1))[0][0])
+
+    def _detect_topics_and_language(self, query: str) -> Dict[str, Dict]:
+        """Enhanced topic and language detection with hierarchical matching."""
+        query_tokens = set(self._preprocess_text(query))
         
-        # Add fundamentals for basic queries
-        if 'simple' in query_lower or 'basic' in query_lower or 'example' in query_lower:
-            if 'fundamentals' not in detected['topics']:
-                detected['topics'].append('fundamentals')
+        detected = {
+            'topics': defaultdict(list),
+            'languages': defaultdict(list)
+        }
+        
+        # Detect topics with hierarchical matching and fuzzy matching
+        for main_category, subcategories in self.topic_categories.items():
+            for subcategory, keywords in subcategories.items():
+                # Check for exact matches
+                matches = [keyword for keyword in keywords 
+                          if any(token in query_tokens for token in keyword.split())]
+                
+                # Check for partial matches (e.g., "algorithm" matches "algorithms")
+                partial_matches = [keyword for keyword in keywords 
+                                 if any(token.startswith(keyword) or keyword.startswith(token) 
+                                      for token in query_tokens)]
+                
+                all_matches = list(set(matches + partial_matches))
+                if all_matches:
+                    detected['topics'][main_category].append({
+                        'subcategory': subcategory,
+                        'matches': all_matches
+                    })
+        
+        # Enhanced language detection with context awareness
+        for lang, categories in self.programming_languages.items():
+            for category, keywords in categories.items():
+                # Check for exact and partial matches
+                matches = [keyword for keyword in keywords 
+                          if any(token in query_tokens or
+                                any(token.startswith(k) or k.startswith(token) 
+                                    for k in keyword.split())
+                                for token in query_tokens)]
+                if matches:
+                    detected['languages'][lang].append({
+                        'category': category,
+                        'matches': matches
+                    })
         
         return detected
 
-    def _filter_by_year_level(self, file_path: str, year_level: str) -> bool:
-        """Check if a resource matches the year level."""
-        year_code = YEAR_FOLDER_MAP.get(year_level)
-        if not year_code:
-            return True  # If no year specified, include all
+    def _calculate_relevance_score(self, content: Dict, query: str,
+                                 detected_info: Dict[str, Dict]) -> float:
+        """
+        Calculate an enhanced relevance score using multiple factors:
+        1. TF-IDF similarity
+        2. Semantic similarity using sentence embeddings
+        3. Topic and language relevance
+        4. Code quality and structure
+        """
+        # Initialize score components
+        tfidf_score = 0.0
+        semantic_score = 0.0
+        topic_score = 0.0
+        language_score = 0.0
         
-        # Check if the file is in the correct year folder
-        path_parts = Path(file_path).parts
-        return any(part == year_code for part in path_parts)
-
-    def _calculate_relevance_score(self, content: Dict, query_tokens: List[str], 
-                                 detected_langs: List[str], detected_topics: List[str]) -> float:
-        """Calculate how relevant a resource is to the query."""
-        score = 0.0
+        # Calculate TF-IDF similarity
+        if content.get('text'):
+            try:
+                tfidf_matrix = self.tfidf_vectorizer.fit_transform([query, content['text']])
+                tfidf_score = float(cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0])
+            except Exception as e:
+                logger.warning(f"Error calculating TF-IDF score: {e}")
         
-        # Special handling for simple program requests
-        query_text = ' '.join(query_tokens).lower()
-        if 'simple' in query_text and 'program' in query_text:
-            # Boost score for basic/simple programs
-            if any(word in content['title'].lower() for word in ['simple', 'basic', 'hello', 'first']):
-                score += 0.5
-            # Penalize complex or advanced topics
-            if any(word in content['title'].lower() for word in ['advanced', 'complex', 'expert']):
-                score -= 0.3
+        # Calculate semantic similarity
+        try:
+            semantic_score = self._calculate_semantic_similarity(query, content.get('text', ''))
+        except Exception as e:
+            logger.warning(f"Error calculating semantic similarity: {e}")
         
-        # Convert content text to tokens for comparison
-        content_text = f"{content['title']} {content['purpose']} {content['context']}"
-        content_tokens = self._preprocess_text(content_text)
+        # Calculate topic relevance
+        if detected_info['topics']:
+            topic_matches = sum(len(subcats) for subcats in detected_info['topics'].values())
+            topic_score = min(1.0, topic_matches / 3.0)  # Normalize to [0,1]
         
-        # Score based on token matches in title (higher weight)
-        title_tokens = self._preprocess_text(content['title'])
-        title_matches = set(query_tokens) & set(title_tokens)
-        if title_matches:
-            score += 0.4 * (len(title_matches) / len(query_tokens))
+        # Calculate language relevance
+        if detected_info['languages']:
+            lang_matches = sum(len(cats) for cats in detected_info['languages'].values())
+            language_score = min(1.0, lang_matches / 2.0)  # Normalize to [0,1]
         
-        # Score based on token matches in purpose and context
-        content_matches = set(query_tokens) & set(content_tokens)
-        if content_matches:
-            score += 0.3 * (len(content_matches) / len(query_tokens))
+        # Weighted combination of scores
+        final_score = (
+            0.3 * tfidf_score +
+            0.3 * semantic_score +
+            0.2 * topic_score +
+            0.2 * language_score
+        )
         
-        # Bonus for language match
-        if detected_langs and content['language'].lower() in [lang.lower() for lang in detected_langs]:
-            score += 0.3
-        
-        # Bonus for topic match
-        if detected_topics and any(topic in content['topics'] for topic in detected_topics):
-            score += 0.2
-        
-        # Bonus for code quality and simplicity
-        if content['code'].strip():
-            # Basic code quality checks
-            has_comments = '//' in content['code'] or '#' in content['code']
-            has_structure = '{' in content['code'] or 'def ' in content['code']
-            code_lines = len(content['code'].split('\n'))
-            
-            code_score = 0.1  # Base score for having code
-            if has_comments:
-                code_score += 0.05
-            if has_structure:
-                code_score += 0.05
-            # For simple program requests, prefer shorter code
-            if 'simple' in query_text:
-                if 5 <= code_lines <= 15:  # Ideal length for simple examples
-                    code_score += 0.1
-            else:
-                if 5 <= code_lines <= 50:  # Normal ideal length
-                    code_score += 0.05
-            
-            score += code_score
-        
-        # Bonus for beginner-friendly content
-        if any(word in content_text.lower() for word in ['simple', 'basic', 'beginner', 'introduction']):
-            score += 0.1
-        
-        return min(score, 1.0)  # Normalize to 0-1 range
+        return min(1.0, max(0.0, final_score))  # Ensure score is in [0,1]
 
     def search_resources(self, query: str, year_level: str, min_score: float = 0.2) -> List[ResourceMatch]:
-        """Search for relevant resources based on the query."""
+        """
+        Search through resources using enhanced semantic search and scoring.
+        Returns list of ResourceMatch objects sorted by relevance score.
+        """
         logger.info(f"Searching for: '{query}' (year level: {year_level})")
         
-        try:
-            # Preprocess query
-            query_tokens = self._preprocess_text(query)
-            detected = self._detect_topics_and_language(query)
+        # Preprocess query and detect topics/language
+        query_tokens = self._preprocess_text(query)
+        logger.debug(f"Query tokens: {query_tokens}")
+        
+        detected_info = self._detect_topics_and_language(query)
+        logger.debug(f"Detected languages: {detected_info.get('languages', {})}")
+        logger.debug(f"Detected topics: {detected_info.get('topics', {})}")
             
-            logger.debug(f"Query tokens: {query_tokens}")
-            logger.debug(f"Detected languages: {detected['languages']}")
-            logger.debug(f"Detected topics: {detected['topics']}")
+        matches = []
             
-            matches = []
-            
-            # For simple program requests, first try to find exact matches
-            if 'simple' in query.lower() and 'program' in query.lower():
-                # Look for simple/basic program examples first
-                for file_path, content in self._content_cache.items():
-                    if (self._filter_by_year_level(file_path, year_level) and
-                        any(word in content['title'].lower() for word in ['simple', 'basic', 'hello']) and
-                        content['language'].lower() == detected['languages'][0]):
-                        
-                        match = ResourceMatch(
-                            title=content['title'],
-                            language=content['language'],
-                            purpose=content['purpose'],
-                            code=content['code'].strip(),
-                            context=content['context'],
-                            source_file=content['source_file'],
-                            topics=content['topics'],
-                            score=0.9  # High score for exact matches
-                        )
-                        matches.append(match)
-                        logger.debug(f"Found simple program match in {file_path}")
-                
-                if matches:
-                    # Sort by code simplicity (fewer lines = simpler)
-                    matches.sort(key=lambda x: len(x.code.split('\n')))
-                    return matches[:1]  # Return only the simplest match
-            
-            # If no simple matches found or not a simple program request,
-            # proceed with normal search
-            for file_path, content in self._content_cache.items():
-                try:
-                    # Filter by year level
-                    if not self._filter_by_year_level(file_path, year_level):
-                        continue
+        # Search through all resources
+        for file_path in self._content_cache:
+            content = self._content_cache[file_path]
                     
                     # Calculate relevance score
-                    score = self._calculate_relevance_score(
-                        content, 
-                        query_tokens,
-                        detected['languages'],
-                        detected['topics']
-                    )
+            score = self._calculate_relevance_score(content, query, detected_info)
                     
-                    if score >= min_score:
-                        # Clean and format the content
-                        clean_code = content['code'].strip()
-                        if not clean_code:
-                            continue
+            if score >= min_score:
+                # Extract framework info from content or filename
+                framework_info = self._extract_framework_info(content, file_path)
                         
-                        match = ResourceMatch(
-                            title=content['title'],
-                            language=content['language'],
-                            purpose=content['purpose'],
-                            code=clean_code,
-                            context=content['context'],
-                            source_file=content['source_file'],
-                            topics=content['topics'],
-                            score=score
-                        )
-                        matches.append(match)
-                        logger.debug(f"Found match in {file_path} with score {score}")
-                except Exception as e:
-                    logger.error(f"Error processing file {file_path}: {str(e)}")
-                    continue
-            
-            # Sort by relevance score
-            matches.sort(key=lambda x: x.score, reverse=True)
-            
-            # Limit matches based on query type
-            if 'simple' in query.lower():
-                matches = matches[:1]  # Only return best match for simple queries
-            else:
-                matches = matches[:5]  # Return up to 5 matches for other queries
+                match = ResourceMatch(
+                title=content.get('title', ''),
+                language=content.get('language', ''),
+                purpose=content.get('purpose', ''),
+                code=content.get('code', ''),
+                context=content.get('context', ''),
+                source_file=file_path,
+                topics=content.get('topics', []),
+                framework_name=framework_info.get('name', ''),
+                framework_version=framework_info.get('version', ''),
+                difficulty_level=content.get('difficulty_level', ''),
+                        score=score
+                    )
+                matches.append(match)
             
             logger.info(f"Found {len(matches)} matches above score {min_score}")
-            return matches
+        return sorted(matches, key=lambda x: x.score, reverse=True)
+
+    def _extract_framework_info(self, content: Dict, file_path: str) -> Dict[str, str]:
+        """Extract framework name and version from content or filename."""
+        framework_info = {'name': '', 'version': ''}
+        
+        # Try to extract from content first
+        if 'framework' in content:
+            framework_data = content['framework']
+            if isinstance(framework_data, dict):
+                framework_info['name'] = framework_data.get('name', '')
+                framework_info['version'] = framework_data.get('version', '')
+            elif isinstance(framework_data, str):
+                framework_info['name'] = framework_data
+        
+        # If not found in content, try to extract from filename
+        if not framework_info['name']:
+            filename = os.path.basename(file_path).lower()
+            common_frameworks = {
+                'django': r'django[_-]?(\d+(?:\.\d+)*)?',
+                'flask': r'flask[_-]?(\d+(?:\.\d+)*)?',
+                'spring': r'spring[_-]?(\d+(?:\.\d+)*)?',
+                'react': r'react[_-]?(\d+(?:\.\d+)*)?',
+                'angular': r'angular[_-]?(\d+(?:\.\d+)*)?',
+                'vue': r'vue[_-]?(\d+(?:\.\d+)*)?'
+            }
             
-        except Exception as e:
-            logger.error(f"Error during resource search: {str(e)}")
-            return []
+            for framework, pattern in common_frameworks.items():
+                match = re.search(pattern, filename)
+                if match:
+                    framework_info['name'] = framework
+                    if match.group(1):
+                        framework_info['version'] = match.group(1)
+                    break
+        
+        return framework_info
 
     def generate_response(self, query: str, matches: List[ResourceMatch], year_level: str) -> Optional[str]:
         """Generate a response based on the search results."""

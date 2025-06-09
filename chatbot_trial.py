@@ -29,9 +29,12 @@ RESOURCES_DIR = os.path.join(project_root, "cleaned_resources")
 import streamlit as st
 import time
 from dotenv import load_dotenv
-from retrievalAlgorithms.resource_retriever import SmartResourceRetriever, ResourceMatch
-from chatbotcodes.query_analyzer import QueryAnalysis, QueryAnalyzer
+
+# Import local modules
+from chatbotcodes.models import QueryAnalysis, ResourceMatch
+from chatbotcodes.query_analyzer import QueryAnalyzer
 from chatbotcodes.rag_generator import LocalResponseGenerator, APIResponseGenerator, format_response_for_display
+from retrievalAlgorithms.resource_retriever import SmartResourceRetriever
 
 # Load environment variables
 load_dotenv()
@@ -380,9 +383,12 @@ def get_default_language(year_level: str) -> str:
 
 def detect_language_from_query(query: str, year_level: str) -> str:
     """Detect programming language from query, fallback to year-level default if none found."""
+    # First get the default language for the year level
+    default_lang = get_default_language(year_level)
+    
     query_lower = query.lower()
     
-    # First, check for explicit language mentions
+    # Only override default if explicitly requested
     language_keywords = {
         "c++": ["c++", "cpp"],
         "python": ["python", "py"],
@@ -402,34 +408,13 @@ def detect_language_from_query(query: str, year_level: str) -> str:
         "r": [" r ", "rlang"]
     }
     
-    # Check for explicit framework mentions
-    framework_to_language = {
-        "django": "python",
-        "flask": "python",
-        "spring": "java",
-        "react": "javascript",
-        "angular": "javascript",
-        "vue": "javascript",
-        "express": "javascript",
-        "rails": "ruby",
-        "laravel": "php",
-        "asp.net": "c#",
-        "flutter": "dart"
-    }
-    
-    # First check for explicit language mentions
+    # Check for explicit language mentions
     for lang, keywords in language_keywords.items():
         if any(keyword in query_lower for keyword in keywords):
             return lang
             
-    # Then check for framework mentions only if frameworks are explicitly asked about
-    if "framework" in query_lower:
-        for framework, lang in framework_to_language.items():
-            if framework in query_lower:
-                return lang
-    
-    # If no language is detected, return the default for the year level
-    return get_default_language(year_level)
+    # If no explicit language mentioned, return the default for the year level
+    return default_lang
 
 def search_resources_across_years(query: str, current_year_level: str) -> List[ResourceMatch]:
     """Search for resources across all year levels, prioritizing the current year level."""
@@ -1073,87 +1058,80 @@ def update_conversation_context(user_query: str, response: str, context: dict = 
             conv_context['context_stack'].pop(0)
 
 def process_query(user_query: str, year_level: str) -> str:
-    try:
-        logger.debug(f"Processing query: '{user_query}' for {year_level}")
+    """Process user query and generate appropriate response."""
+    logger.debug(f"Processing query: '{user_query}' for {year_level}")
         
-        # First check if this is a generic interaction
-        generic_intent = detect_generic_intent(user_query)
-        if generic_intent['type'] and generic_intent['type'] != 'follow_up':
-            response = generate_generic_response(generic_intent)
-            if response:
-                update_conversation_context(user_query, response)
-                return response
-        
-        # Then check if this is a follow-up question
-        if generic_intent['type'] == 'follow_up' or generic_intent['confidence'] < 0.5:
-            follow_up_response = handle_follow_up_question(user_query, year_level)
-            if follow_up_response:
-                update_conversation_context(user_query, follow_up_response)
-                return follow_up_response
-        
-        # Check if this is a web application request
-        if any(term in user_query.lower() for term in ["web", "website", "webpage", "calculator"]):
-            try:
-                web_response = generate_web_app_response(user_query, year_level)
-                if web_response:
-                    context = {
-                        'topic': 'web_development',
-                        'language': 'python',
-                        'code': web_response,
-                        'explanation': 'Web application tutorial'
-                    }
-                    update_conversation_context(user_query, web_response, context)
-                    return web_response
-            except Exception as e:
-                logger.error(f"Error generating web app response: {str(e)}")
-                return "I apologize, but I encountered an error while generating the web application example. Could you try rephrasing your request or specifying which part you'd like help with first?"
-        
-        # Continue with regular query processing
-        query_analysis = st.session_state.components['analyzer'].analyze_query(
-            query=user_query,
-            year_level=year_level
-        )
+    # Initialize components
+    retriever = st.session_state.components['retriever']
+    analyzer = st.session_state.components['analyzer']
+    local_generator = st.session_state.components['local_generator']
+    api_generator = st.session_state.components['api_generator']
+    
+    # Analyze query
+    analysis = analyzer.analyze_query(user_query, year_level)
+    logger.debug(f"Query analysis: {analysis}")
         
         # Search for relevant resources
-        matches = st.session_state.components['retriever'].search_resources(
-            query=user_query,
-            year_level=year_level
-        )
+    matches = retriever.search_resources(user_query, year_level)
         
-        # If no matches in current year level, search other years
-        if not matches:
-            matches = search_resources_across_years(user_query, year_level)
-        
-        # Generate appropriate response
-        if matches:
-            response = format_matches_for_display(matches)
-            context = {
-                'topic': query_analysis.topic if hasattr(query_analysis, 'topic') else None,
-                'language': query_analysis.language if hasattr(query_analysis, 'language') else None,
-                'code': matches[0].code if matches else None,
-                'explanation': matches[0].explanation if matches and hasattr(matches[0], 'explanation') else None
-            }
-            update_conversation_context(user_query, response, context)
-            return response
-        
-        # If no matches found, use API response
-        api_response = st.session_state.components['api_generator'].generate_response(
-            query=user_query,
-            year_level=year_level
-        )
-        
-        if api_response:
-            context = {
-                'topic': query_analysis.topic if hasattr(query_analysis, 'topic') else None,
-                'language': query_analysis.language if hasattr(query_analysis, 'language') else None,
-                'explanation': api_response
-            }
-            update_conversation_context(user_query, api_response, context)
-            return api_response
+    if not matches:
+        # No relevant resources found, use API generator
+        response = api_generator.generate_response(user_query, analysis)
+    else:
+        # Use local generator with retrieved resources
+        response = local_generator.generate_response(user_query, matches, analysis)
+    
+    return format_response_for_display(response)
 
-    except Exception as e:
-        logger.error(f"Error processing query: {str(e)}")
-        return "I apologize, but I encountered an error. Could you try rephrasing your question or breaking it down into smaller parts?"
+def generate_sorting_algorithm_response() -> str:
+    """Generate a response with a C++ sorting algorithm implementation."""
+    code = """#include <iostream>
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                // Swap elements
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    
+    cout << "Original array: ";
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+    
+    bubbleSort(arr, n);
+    
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+    
+    return 0;
+}"""
+
+    explanation = """Here's a Bubble Sort implementation in C++:
+
+1. The `bubbleSort` function takes an array and its size as parameters
+2. It uses two nested loops to compare adjacent elements
+3. If an element is greater than the next element, they are swapped
+4. This process continues until the array is sorted
+5. The main function shows how to use the sorting function with a sample array
+
+Time Complexity: O(n²) where n is the number of elements
+Space Complexity: O(1) as it sorts in-place"""
+
+    return f"```cpp\n{code}\n```\n\n{explanation}"
 
 def generate_simpler_version(code: str, language: str, year_level: str) -> str:
     """Generate a simpler version of the given code."""
@@ -1719,157 +1697,34 @@ def format_web_app_tutorial(title: str, description: str, components: List[dict]
 
 # Main chat interface
 def main():
-    # Add custom CSS for dark theme and layout
-    st.markdown("""
-        <style>
-        /* Reset and base styles */
-        .stApp {
-            background-color: #0E1117;
-        }
-        
-        .main-title {
-            color: white;
-            font-size: 2.5rem !important;
-            padding: 1rem 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        /* Hide default Streamlit elements */
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        
-        /* Sidebar customization */
-        .css-1d391kg {
-            background-color: #1A1E24;
-            padding: 2rem 1rem;
-        }
-        
-        /* Chat container */
-        .stChatMessage {
-            background-color: #1E1E1E;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* Input field */
-        .stChatInputContainer {
-            background-color: #0E1117;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-        }
-        
-        .stChatInput {
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Year level selector */
-        .stSelectbox {
-            background-color: #1E1E1E;
-        }
-        
-        /* Custom emoji style */
-        .title-emoji {
-            font-size: 1.8rem;
-            transform: rotate(-15deg);
-            display: inline-block;
-            color: #FF9D00;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-    # Create title with emoji
-    st.markdown('<h1 class="main-title">IntelliSE <span class="title-emoji">📱</span></h1>', unsafe_allow_html=True)
-
-    # Initialize session state for messages with welcome message
-    if 'messages' not in st.session_state:
-        st.session_state.messages = [
-            {"role": "assistant", "content": "Hello! How can I help you with your coding questions today?"}
-        ]
+    # Only set title if it's not already set
+    if 'title_set' not in st.session_state:
+        st.title("IntelliSE Coding Assistant")
+        st.session_state.title_set = True
     
-    if 'conversation_context' not in st.session_state:
-        st.session_state.conversation_context = {
-            'last_code': None,
-            'last_topic': None,
-            'last_language': None,
-            'last_explanation': None,
-            'chat_history': [],
-            'context_stack': []
-        }
-
-    # Sidebar content
-    with st.sidebar:
-        st.markdown("### Year Level Selection")
-        st.markdown("""
-            Choose your year level to get explanations with appropriate terminology.
-            
-            - Year 1: Basic, beginner-friendly terms
-            - Year 2: More technical terminology
-            - Year 3: Professional concepts
-            - Year 4: Advanced academic terms
-            
-            Note: You can ask about any programming language regardless of your year level!
-        """)
-        
-        year_level = st.selectbox(
-            "Select Your Year Level:",
-            [
-                "Year 1 Certificate",
-                "Year 2 Diploma",
-                "Year 3 Degree",
-                "Year 4 Postgraduate Diploma"
-            ],
-            key="year_level"
-        )
-
-        if 'last_response_source' in st.session_state:
-            source = st.session_state.last_response_source
-            if source == 'local':
-                st.success("🎯 Using Local Resources")
-            else:
-                st.info("🌐 Using External API")
-
-    # Main chat area
-    chat_container = st.container()
+    # Display year level selector in sidebar
+    year_level = display_year_level_selector()
     
-    # Display chat messages
-    with chat_container:
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"], unsafe_allow_html=True)
+    # Get user input
+    if prompt := st.chat_input("Ask your coding question..."):
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
     
-    # Chat input
-    if user_query := st.chat_input("Ask your coding question..."):
-        # Add user message to chat
-        st.chat_message("user").markdown(user_query)
-        st.session_state.messages.append({"role": "user", "content": user_query})
+        # Display user message
+        with st.chat_message("user"):
+            st.markdown(prompt)
         
-        # Display thinking message
+        # Display assistant response
         with st.chat_message("assistant"):
-            thinking_placeholder = st.empty()
-            thinking_placeholder.markdown("🤔 Thinking...")
-            
             try:
-                # Process query and generate response
-                response = process_query(user_query, year_level)
-                
-                # Update display with response
-                thinking_placeholder.empty()
-                st.markdown(response, unsafe_allow_html=True)
-                
-                # Add assistant response to chat history
+                response = process_query(prompt, year_level)
                 st.session_state.messages.append({"role": "assistant", "content": response})
+                st.markdown(response, unsafe_allow_html=True)
             except Exception as e:
-                logger.error(f"Error in main chat interface: {str(e)}")
-                thinking_placeholder.empty()
-                error_message = "I apologize, but I encountered an error. Could you try asking your question in a different way?"
-                st.markdown(error_message)
-                st.session_state.messages.append({"role": "assistant", "content": error_message})
+                logger.error(f"Error processing query: {str(e)}")
+                error_msg = "I apologize, but I encountered an error. Could you try rephrasing your question or breaking it down into smaller parts?"
+                st.session_state.messages.append({"role": "assistant", "content": error_msg})
+                st.markdown(error_msg)
 
 if __name__ == "__main__":
-    logger.debug("Starting Coding Assistant Chatbot")
     main()
